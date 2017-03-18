@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <meta charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="echarts.min.js"></script>
+</head>
+
+
+<body>
+    <div class="col-md-5">
+                    <form action="">
+                        Choose the chart you want to see:
+                        <br>
+                        <label class="radio-inline"><input class="camp-evolution-type-selector" type="radio" name="camp" value="jian" >建</label>
+                        <label class="radio-inline"><input class="camp-evolution-type-selector" type="radio" value="fan" name="camp">泛</label>
+                        <label class="radio-inline"><input class="camp-evolution-type-selector" type="radio" value="zong" name="camp">Grand Total</label>
+                    </form>
+                    <div id="hkdce-camp-evolution" style="width: 600px;height:400px;"></div>
+                </div>
+            </div>
+
+ <script type="text/javascript">
+                // Initialse eCharts
+                $(function() {
+                    var series_jian = [{
+                "name": "女",
+                "type": "line",
+                "data": [22,32,52,64,57]
+},{
+                "name": "男",
+                "type": "line",
+                "data": [168,157,208,239,226]
+},{
+                "name": "Total",
+                "type": "line",
+                "data": [190,189,260,303,283]
+}];
+
+var series_fan = [{
+                "name": "女",
+                "type": "line",
+                "data": [21,33,19,12,14]
+},{
+                "name": "男",
+                "type": "line",
+                "data": [113,141,90,78,93]
+},{
+                "name": "Total",
+                "type": "line",
+                "data": [134,174,109,90,107]
+}];
+
+var series_zong = [{
+                "name": "女",
+                "type": "line",
+                "data": [57,71,78,79,79]
+},{
+                "name": "男",
+                "type": "line",
+                "data": [333,329,327,333,352]
+},{
+                "name": "Total",
+                "type": "line",
+                "data": [390,400,405,412,431]
+}];
+
+var option = {
+                        "title": {
+                            "text": "Gender Distribution in Different Camps",
+                        },
+                        "legend": {
+                            "data": ["女", "男", "Total"],
+                            "align": "left",
+                            "top": 20,
+                            "left": 10
+                        },
+                        "xAxis": [{
+                            "type": "category",
+                            "data": [
+                                1999,
+                                2003,
+                                2007,
+                                2011,
+                                2015
+                            ],
+                            "axisTick": {
+                                "alignWithLabel": true
+                            }
+                        }],
+                        "yAxis": [{
+                            "type": "value"
+                        }],
+                        "series": []
+                    };
+                    $('input.camp-evolution-type-selector').click(function() {
+                        // alert($(this).val());
+                        if ($(this).val() == 'fan') {
+                            console.log('fan');
+                            option["series"] = series_fan;
+                            option["title"]["text"] = "Gender distribution in pan-democratic Camp";
+                        } else if ($(this).val() == 'jian') {
+                            console.log('jian');
+                            option["series"] = series_jian;
+                            option["title"]["text"] = "Gender distribution in pro-establish Camp";
+                        } else if ($(this).val() == 'zong') {
+                            console.log('zong');
+                            option["series"] = series_zong;
+                            option["title"]["text"] = "Gender distribution at grand total"; 
+                        } else {
+                            console.log('Error');
+                        }
+                        var myChart1 = echarts.init(document.getElementById('hkdce-camp-evolution'));
+                        myChart1.setOption(option);
+                    });
+                });
+            </script>
+
+
+
+
+
+</body>
+</html>
